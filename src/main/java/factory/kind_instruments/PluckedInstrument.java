@@ -1,8 +1,12 @@
+package factory.kind_instruments;
+
 import enums.Material;
 import enums.Resonators;
+import factory.MusicalInstrument;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class PluckedInstrument extends MusicalInstrument implements Stringed {
     private Resonators resonators;
@@ -18,8 +22,18 @@ public class PluckedInstrument extends MusicalInstrument implements Stringed {
     }
 
     @Override
-    public void generateSound(String kind) {
-
+    public void generateSound() {
+        ListIterator<PluckedInstrument> listIterator = initInstrument().listIterator();
+        while (listIterator.hasNext()){
+            PluckedInstrument nextInstrument = listIterator.next();
+            if(nextInstrument.getResonators().getResonatorsLength().isShortResonators()){
+                System.out.println(nextInstrument.name+" plays high sound");
+            } else  if(nextInstrument.getResonators().getResonatorsLength().isMediumResonators()){
+                System.out.println(nextInstrument.name+" plays middle sound");
+            } else  if(nextInstrument.getResonators().getResonatorsLength().isLongResonators()){
+                System.out.println(nextInstrument.name+" plays low sound");
+            }
+        }
     }
 
     //TODO make list of constants
@@ -38,17 +52,17 @@ public class PluckedInstrument extends MusicalInstrument implements Stringed {
     public static String stringRepresentation(PluckedInstrument pluckedInstrument){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Instrument name: ")
-                .append(pluckedInstrument.getName())
+                .append(pluckedInstrument.name)
                 .append("\n")
                 .append("Sound source: ")
-                .append(pluckedInstrument.getSoundSource())
+                .append(pluckedInstrument.soundSource)
                 .append("\n")
                 .append("Resonator presence: ")
-                .append(pluckedInstrument.isResonatorPresence())
+                .append(pluckedInstrument.resonatorPresence)
                 .append("\n")
                 .append("Instrument material: ")
-                .append(pluckedInstrument.getInstrumentMaterial().name().toLowerCase())
-                .append(Material.valueOf(pluckedInstrument.getInstrumentMaterial().name()))
+                .append(pluckedInstrument.instrumentMaterial.name().toLowerCase())
+                .append(Material.valueOf(pluckedInstrument.instrumentMaterial.name()))
                 .append("\n")
                 .append("Resonators: ")
                 .append(pluckedInstrument.getResonators().name().toLowerCase())

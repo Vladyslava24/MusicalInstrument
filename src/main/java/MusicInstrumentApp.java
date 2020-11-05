@@ -1,28 +1,22 @@
+import factory.StringedInstrumentFactory;
+import factory.kind_instruments.BowedInstrument;
+import factory.kind_instruments.PluckedInstrument;
 
 public class MusicInstrumentApp {
     public static void main(String[] args) {
-        //StringedInstrumentFactory stringedFactory = (StringedInstrumentFactory) getFactoryByKindInstrument(GeneralKind.STRINGLED);
-       StringedInstrumentFactory stringedInstrumentFactory = new StringedInstrumentFactory();
-       stringedInstrumentFactory.makeInstruments();
-       stringedInstrumentFactory.objectComprasion(stringedInstrumentFactory.getFactoryBowedList());
-        //bowed.useBow();
-        //plucked.usePick();
+        //factory.StringedInstrumentFactory stringedFactory = (factory.StringedInstrumentFactory) getFactoryByKindInstrument(GeneralKind.STRINGLED);
+        try {
+            StringedInstrumentFactory stringedInstrumentFactory = new StringedInstrumentFactory();
+            stringedInstrumentFactory.makeBowedInstruments();
+            stringedInstrumentFactory.objectComprasion(stringedInstrumentFactory.getFactoryBowedList());
+            stringedInstrumentFactory.makePluckedInstruments();
+            StringedInstrumentFactory.Statistics statistics = stringedInstrumentFactory.new Statistics();
+            System.out.println("Make statistics of produced instruments");
+            System.out.println();
+            statistics.makeStatistics();
+        } catch (Exception e){
+            e.printStackTrace();
     }
 
-
-//TODO Change if and case
-    /*public static MusicalInstrument getFactoryByKindInstrument(GeneralKind kind) {
-        switch (kind) {
-            case PERCUSSION:
-                return new factory.PercussionInstrumentFactory();
-            case STRINGED:
-                return new StringedInstrumentFactory();
-            case WIND:
-                return new factory.WindInstrumentFactory();
-            case REED:
-                return new factory.ReedInstrumentFactory();
-            default:
-                throw new RuntimeException("Unsupported kind of instrument " + kind);
-        }
-    }*/
+    }
 }

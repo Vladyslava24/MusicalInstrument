@@ -7,9 +7,26 @@ public enum  ResonatorsLength {
 
     private double length;
 
-
     ResonatorsLength(double length) {
         this.length = length;
+    }
+
+    public boolean isShortResonators(){
+        if(length<15.0)
+            return true;
+        return false;
+    }
+
+    public boolean isMediumResonators(){
+        if(length>=15.0 && length<=30.0)
+            return true;
+        return false;
+    }
+
+    public boolean isLongResonators(){
+        if(length>=30.0)
+            return true;
+        return false;
     }
 
     public double getLength() {

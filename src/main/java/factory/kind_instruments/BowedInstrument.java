@@ -1,17 +1,20 @@
+package factory.kind_instruments;
+
 import enums.Material;
 import enums.Resonators;
+import factory.MusicalInstrument;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Objects;
 
 public class BowedInstrument extends MusicalInstrument implements Stringed {
-    public static final String CHARACTER = "\n";
+    private static final String CHARACTER = "\n";
     private Resonators resonators;
     private String playingWay;
     private String additionalSubject;
-    private static final String CHARACTER = "\n";
 
     public BowedInstrument(){
 
@@ -37,20 +40,35 @@ public class BowedInstrument extends MusicalInstrument implements Stringed {
         return bowedList;
     }
 
+    @Override
+    public void generateSound() {
+        ListIterator<BowedInstrument> listIterator = initInstrument().listIterator();
+        while (listIterator.hasNext()){
+            BowedInstrument nextInstrument = listIterator.next();
+            if(nextInstrument.getResonators().getResonatorsLength().isShortResonators()){
+                System.out.println(nextInstrument.name+" plays high sound");
+            } else  if(nextInstrument.getResonators().getResonatorsLength().isMediumResonators()){
+                System.out.println(nextInstrument.name+" plays middle sound");
+            } else  if(nextInstrument.getResonators().getResonatorsLength().isLongResonators()){
+                System.out.println(nextInstrument.name+" plays low sound");
+            }
+        }
+    }
+
     public static String stringRepresentation(BowedInstrument bowedInstrument){
          StringBuilder stringBuilder = new StringBuilder();
          stringBuilder.append("Instrument name: ")
-                 .append(bowedInstrument.getName())
+                 .append(bowedInstrument.name)
                  .append(CHARACTER)
                  .append("Sound source: ")
-                 .append(bowedInstrument.getSoundSource())
+                 .append(bowedInstrument.soundSource)
                  .append(CHARACTER)
                  .append("Resonator presence: ")
-                 .append(bowedInstrument.isResonatorPresence())
+                 .append(bowedInstrument.resonatorPresence)
                  .append(CHARACTER)
                  .append("Instrument material: ")
-                 .append(bowedInstrument.getInstrumentMaterial().name().toLowerCase())
-                 .append(Material.valueOf(bowedInstrument.getInstrumentMaterial().name()))
+                 .append(bowedInstrument.instrumentMaterial.name().toLowerCase())
+                 .append(Material.valueOf(bowedInstrument.instrumentMaterial.name()))
                  .append("\n")
                  .append("Resonators: ")
                  .append(bowedInstrument.getResonators().name().toLowerCase())
@@ -76,17 +94,10 @@ public class BowedInstrument extends MusicalInstrument implements Stringed {
         BowedInstrument instrument = (BowedInstrument) obj;
         return  Objects.equals(name, instrument.name) &&
                 Objects.equals(soundSource, instrument.soundSource) &&
-                Objects.equals(getInstrumentMaterial(), getInstrumentMaterial()) &&
+                Objects.equals(instrumentMaterial, instrument.instrumentMaterial) &&
                 Objects.equals(resonators, instrument.resonators) &&
                 Objects.equals(playingWay, instrument.playingWay) &&
                 Objects.equals(additionalSubject, instrument.additionalSubject);
-    }
-
-
-
-    @Override
-    public void generateSound(String kind) {
-
     }
 
     public Resonators getResonators() {
@@ -115,7 +126,7 @@ public class BowedInstrument extends MusicalInstrument implements Stringed {
 
     @Override
     public String toString() {
-        return "BowedInstrument{" +
+        return "factory.kind_instruments.BowedInstrument{" +
                 "resonators=" + resonators +
                 ", playingWay='" + playingWay + '\'' +
                 ", additionalSubject='" + additionalSubject + '\'' +
