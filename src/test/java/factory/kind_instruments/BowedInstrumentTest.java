@@ -13,29 +13,18 @@ import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.is;
 
 public class BowedInstrumentTest {
-    //private factory.kind_instruments.BowedInstrument bowedInstrument;
-
-
+    BowedInstrument bowedInstrument = new BowedInstrument();
 
     @Test
-    public void initInstrument() {
-        BowedInstrument bowedInstrument = new BowedInstrument();
+    public void whenInitInstrumentThenGetSizeOfList() {
         List<BowedInstrument> bowedInstrumentList  = new ArrayList<>();
         assertThat(bowedInstrumentList.size(), is(0));
         bowedInstrumentList = bowedInstrument.initInstrument();
         assertThat(bowedInstrumentList.size(), is(3));
     }
 
-
-
-    /*@Test
-    public void stringRepresentation() {
-        factory.kind_instruments.BowedInstrument bowedInstrument = new factory.kind_instruments.BowedInstrument();
-        factory.kind_instruments.BowedInstrument.stringRepresentation(bowedInstrument);
-    }*/
-
     @Test
-    public void testEquals() {
+    public void whenEqualsThenReturnTrue() {
         BowedInstrument bowedInstrument1 = new BowedInstrument("Violin", "string", true, Material.FIR,
                 Resonators.STRINGED_MEDIUM, "bow", "bow");
         BowedInstrument bowedInstrument2 = new BowedInstrument("Violin", "string", true, Material.FIR,
@@ -48,9 +37,5 @@ public class BowedInstrumentTest {
         assertFalse(bowedInstrument1.equals(pluckedInstrument));
         assertTrue(bowedInstrument1.equals(bowedInstrument2));
         assertFalse(bowedInstrument1.equals(bowedInstrument3));
-    }
-
-    @Test
-    public void generateSound() {
     }
 }

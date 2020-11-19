@@ -103,7 +103,11 @@ public class StringedInstrumentFactory {
                 System.out.println("Amount of stringed instruments: " + generalAmount);
                 System.out.println("Amount of bowed instruments: " + amountBowed);
                 System.out.println("Amount of plucked instruments: " + amountPlucked);
-                calculatePercentage();
+                DecimalFormat decimalFormat = new DecimalFormat( "#.##" );
+                String bowed = decimalFormat.format(calculateBowedPercentage());
+                String plucked = decimalFormat.format(calculatePluckedPercentage());
+                System.out.println("Percentage of bowed instruments: "+ bowed +"%");
+                System.out.println("Percentage of plucked instruments: "+plucked + "%");
                 countBowedDuplicates(factoryBowedList);
                 System.out.println("----------");
                 countPluckedDuplicates(factoryPluckedList);
@@ -137,14 +141,14 @@ public class StringedInstrumentFactory {
             }
         }
 
-        public void calculatePercentage(){
+        public double calculateBowedPercentage(){
             double bowedPercentage = (double) amountBowed/ (double) generalAmount * 100;
+            return bowedPercentage;
+        }
+
+        public double calculatePluckedPercentage(){
             double pluckedPercentage = (double) amountPlucked/ (double) generalAmount * 100;
-            DecimalFormat decimalFormat = new DecimalFormat( "#.##" );
-            String bowed = decimalFormat.format(bowedPercentage);
-            String plucked = decimalFormat.format(pluckedPercentage);
-            System.out.println("Percentage of bowed instruments: "+ bowed +"%");
-            System.out.println("Percentage of plucked instruments: "+plucked + "%");
+            return pluckedPercentage;
         }
 
         public long defineAmountShortStrings(){

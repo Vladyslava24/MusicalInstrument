@@ -1,3 +1,5 @@
+package factory;
+
 import enums.Material;
 import enums.Resonators;
 import exception.NotFoundInstrumentException;
@@ -39,92 +41,32 @@ public class StringedInstrumentFactoryTest {
 
 
     @Test
-    public void generateRandomNumber() {
+    public void whenGenerateRandomNumberInGivenRangeThenReturnTrue() {
         int number = instrumentFactory.generateRandomNumber(0, 10);
         assertTrue(number>=0 && number<=10);
         assertFalse(number<0 || number>10);
     }
 
-    /*@Test(expected = IndexOutOfBoundsException.class)
-    public void testGetFirstElementFromEmptyList() {
-        factory.kind_instruments.BowedInstrument bowedInstrument = new factory.kind_instruments.BowedInstrument();
-        instrumentFactory.makeBowedInstruments();
-    }*/
-
-
     @Test
-    public void makeBowedInstruments() {
-        //List<factory.kind_instruments.BowedInstrument> factoryBowedList;
-        //instrumentFactory.makeBowedInstruments();
-    }
-
-
-
-    @Test
-    public void makePluckedInstruments() {
-    }
-
-    @Test
-    public void collectionBowedIterate() {
-        //BowedInstrument bowedInstrument = new BowedInstrument();
-        List<BowedInstrument> instrumentList1 = new ArrayList<>();
-        instrumentFactory.collectionBowedIterate(instrumentList1);
-        assertEquals(0, instrumentList1.size());
-        //bowedInstrumentList = bowedInstrument.initInstrument();
-        instrumentFactory.collectionBowedIterate(bowedInstrumentList);
-        assertEquals(3, bowedInstrumentList.size());
-    }
-
-    @Test
-    public void collectionPluckedIterate() {
-        List<PluckedInstrument> instrumentList2 = new ArrayList<>();
-        instrumentFactory.collectionPluckedIterate(instrumentList2);
-        assertEquals(0, instrumentList2.size());
-        instrumentFactory.collectionPluckedIterate(pluckedInstrumentList);
-        assertEquals(3, pluckedInstrumentList.size());
-    }
-
-    @Test
-    public void objectComprasion() {
-    }
-
-
-    @Test
-    public void testCountDuplicates(){
-        List <PluckedInstrument> list = new ArrayList<>();
-        list.add(new PluckedInstrument("Guitar", "string", true, Material.SPRICE,
-                Resonators.STRINGED_MEDIUM, "fingers"));
-        list.add(new PluckedInstrument("Guitar", "string", true, Material.SPRICE,
-                Resonators.STRINGED_MEDIUM, "fingers"));
-        list.add(new PluckedInstrument("Cello", "string", true, Material.SPRICE,
-                Resonators.STRINGED_MEDIUM, "fingers"));
-        StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
-        statistics.countPluckedDuplicates(list);
-        //assertThat(statistics.countPluckedDuplicates(list), is());
-        //assertEquals("Guitar:2", statistics.countPluckedDuplicates(list));
-        assertEquals(1, Collections.frequency(list, list.get(2)));
-    }
-
-    @Test
-    public void testCalculateBowedAmount(){
+    public void whenCalculateBowedAmountThenReturnSize(){
         StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
         assertEquals(3, statistics.calculateBowedAmount());
     }
 
     @Test
-    public void testCalculatePluckedAmount(){
+    public void whenCalculatePluckedAmountThenReturnSize(){
         StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
         assertEquals(3, statistics.calculatePluckedAmount());
     }
 
     @Test
-    public void testCalculateInstrumentAmount(){
+    public void whenCalculateInstrumentAmountThenReturnSize(){
         StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
         assertEquals(6, statistics.calculateInstrumentAmount());
     }
 
     @Test(expected = NotFoundInstrumentException.class)
-    public void testCalculateInstrumentAmountWithZeroValue(){
+    public void whenCalculateInstrumentAmountWithZeroValueThenThrowNotFoundInstrumentException(){
         StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
         List<BowedInstrument> bowedList = new ArrayList<>();
         List<PluckedInstrument> pluckedList = new ArrayList<>();
@@ -133,21 +75,20 @@ public class StringedInstrumentFactoryTest {
         statistics.calculateInstrumentAmount();
     }
 
-
     @Test
-    public void  testDefineAmountShortStrings(){
+    public void whenDefineAmountShortStringsThenReturnAmount(){
         StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
         assertEquals(1, statistics.defineAmountShortStrings());
     }
 
     @Test
-    public void  testDefineAmountMediumStrings(){
+    public void whenDefineAmountMediumStringsThenReturnAmount(){
         StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
         assertEquals(4, statistics.defineAmountMediumStrings());
     }
 
     @Test
-    public void  testDefineAmountLongStrings(){
+    public void  whenDefineAmountLongStringsThenReturnAmount(){
         StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
         assertEquals(1, statistics.defineAmountLongStrings());
     }
