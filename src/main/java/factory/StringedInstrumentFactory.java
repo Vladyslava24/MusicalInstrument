@@ -1,11 +1,15 @@
 package factory;
 
+import enums.Resonators;
+import enums.ResonatorsLength;
 import exception.NotFoundInstrumentException;
 import factory.kind_instruments.BowedInstrument;
 import factory.kind_instruments.PluckedInstrument;
+import java.util.stream.Collectors;
 
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class StringedInstrumentFactory {
     private List<BowedInstrument> factoryBowedList;
@@ -114,6 +118,11 @@ public class StringedInstrumentFactory {
                 System.out.println("Amount of instruments with short strings: "+ defineAmountShortStrings());
                 System.out.println("Amount of instruments with medium strings: "+ defineAmountMediumStrings());
                 System.out.println("Amount of instruments with long strings: "+ defineAmountLongStrings());
+                System.out.println(bowedMaxResonatorLength().name + ": " + bowedMaxResonatorLength().getResonators().getResonatorsLength().getLength());
+                System.out.println(pluckedMaxResonatorLength().name + ": " + pluckedMaxResonatorLength().getResonators().getResonatorsLength().getLength());
+                System.out.println("Average bowed resonators length: " + decimalFormat.format(calculateBowedAverageResonatorsLength()));
+                System.out.println("Average plucked resonators length: " + decimalFormat.format(calculatePluckedAverageResonatorsLength()));
+                defineMapOfMediumBowedResonators();
             } catch (NotFoundInstrumentException e){
                 e.printStackTrace();
             }
@@ -173,6 +182,33 @@ public class StringedInstrumentFactory {
             long pluckedLong = factoryPluckedList.stream().filter((p)->p.getResonators().getResonatorsLength()
                     .isLongResonators()).count();
             return bowedLong+ pluckedLong;
+        }
+
+        public BowedInstrument bowedMaxResonatorLength(){
+            return factoryBowedList.stream().max(Comparator.
+                    comparing(p -> p.getResonators().getResonatorsLength().getLength())).get();
+        }
+
+        public PluckedInstrument pluckedMaxResonatorLength(){
+            return factoryPluckedList.stream().max(Comparator.
+                    comparing(p -> p.getResonators().getResonatorsLength().getLength())).get();
+        }
+
+        public double calculateBowedAverageResonatorsLength(){
+            return factoryBowedList.stream().mapToDouble((s) -> s.getResonators().getResonatorsLength().getLength()).average().getAsDouble();
+        }
+
+        public double calculatePluckedAverageResonatorsLength(){
+            return factoryPluckedList.stream().mapToDouble((s) -> s.getResonators().getResonatorsLength().getLength()).average().getAsDouble();
+        }
+
+        public Map defineMapOfMediumBowedResonators(){
+            Map<String, List<BowedInstrument>> map = factoryBowedList.stream().
+                    filter((p)->p.getResonators().getResonatorsLength()
+                            .isMediumResonators()).
+                    collect(Collectors.groupingBy(p->p.name));
+            map.forEach((name, p) -> System.out.format("Name: %s: %s\n", name, p));
+            return map;
         }
 
         public int calculateBowedAmount(){

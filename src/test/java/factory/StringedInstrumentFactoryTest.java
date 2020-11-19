@@ -92,4 +92,36 @@ public class StringedInstrumentFactoryTest {
         StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
         assertEquals(1, statistics.defineAmountLongStrings());
     }
+
+    @Test
+    public void whenBowedMaxResonatorLengthThenReturnMax(){
+        StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
+        assertEquals("Double bass", statistics.bowedMaxResonatorLength().name);
+        assertEquals(50.55, statistics.bowedMaxResonatorLength().getResonators().getResonatorsLength().getLength(), 0.01);
+    }
+
+    @Test
+    public void whenPluckedMaxResonatorLengthThenReturnMax(){
+        StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
+        assertEquals("Guitar", statistics.pluckedMaxResonatorLength().name);
+        assertEquals(25.89, statistics.pluckedMaxResonatorLength().getResonators().getResonatorsLength().getLength(), 0.01);
+    }
+
+    @Test
+    public void whenCalculateBowedAverageResonatorsLengthThenReturnAverage(){
+        StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
+        assertEquals(34.11, statistics.calculateBowedAverageResonatorsLength(), 0.01);
+    }
+
+    @Test
+    public void whenCalculatePluckedAverageResonatorsLengthThenReturnAverage(){
+        StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
+        assertEquals(20.78, statistics.calculatePluckedAverageResonatorsLength(), 0.01);
+    }
+
+    @Test
+    public void whenDefineMapOfMediumBowedResonatorsThenReturnMap(){
+        StringedInstrumentFactory.Statistics statistics = instrumentFactory.new Statistics();
+        assertEquals(2, statistics.defineMapOfMediumBowedResonators().size());
+    }
 }
