@@ -71,7 +71,7 @@ public class StringedInstrumentFactory {
         collectionPluckedIterate(factoryPluckedList);
     }
 
-    public void collectionBowedIterate(List<BowedInstrument> factoryList){
+    public int collectionBowedIterate(List<BowedInstrument> factoryList){
         ListIterator<BowedInstrument> listIterator = factoryList.listIterator();
         int count = 1;
         while (listIterator.hasNext()){
@@ -80,9 +80,10 @@ public class StringedInstrumentFactory {
             count++;
         }
         System.out.println(factoryList.size());
+        return factoryList.size();
     }
 
-    public void collectionPluckedIterate(List<PluckedInstrument> factoryList){
+    public int collectionPluckedIterate(List<PluckedInstrument> factoryList){
         ListIterator<PluckedInstrument> listIterator = factoryList.listIterator();
         int count = 1;
         while (listIterator.hasNext()){
@@ -91,6 +92,7 @@ public class StringedInstrumentFactory {
             count++;
         }
         System.out.println(factoryList.size());
+        return factoryList.size();
     }
 
 
@@ -128,7 +130,7 @@ public class StringedInstrumentFactory {
             }
         }
 
-        public void countBowedDuplicates(List<BowedInstrument> list){
+        public int countBowedDuplicates(List<BowedInstrument> list){
             Set<BowedInstrument> set = new HashSet<>(list);
             String str = "";
             for (BowedInstrument instrument : set) {
@@ -137,9 +139,10 @@ public class StringedInstrumentFactory {
             for (String subString : str.split("#")) {
                 System.out.println(subString);
             }
+            return set.size();
         }
 
-        public void countPluckedDuplicates(List<PluckedInstrument> list){
+        public int countPluckedDuplicates(List<PluckedInstrument> list){
             Set<PluckedInstrument> set = new HashSet<>(list);
             String str = "";
             for (PluckedInstrument instrument : set) {
@@ -148,6 +151,7 @@ public class StringedInstrumentFactory {
             for (String subString : str.split("#")) {
                 System.out.println(subString);
             }
+            return set.size();
         }
 
         public double calculateBowedPercentage(){
